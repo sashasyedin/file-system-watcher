@@ -1,0 +1,9 @@
+[Unit]
+Description=Some Company's file watcher
+
+[Service]
+Type=notify
+ExecStart=/usr/sbin/filewatcher/FileSystemWatcher.Host
+
+[Install]
+WantedBy=multi-user.target

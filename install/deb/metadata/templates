@@ -1,0 +1,12 @@
+Template: filewatcher/directory-path
+Type: string
+Description: An absolute path of the directory to watch
+
+Template: filewatcher/blob-storage-uri
+Type: string
+Description: Blob Storage URI
+
+Template: filewatcher/file-filter
+Type: string
+Default: *.json
+Description: File filter (e.g. *.json)

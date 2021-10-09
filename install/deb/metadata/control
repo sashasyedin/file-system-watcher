@@ -1,0 +1,5 @@
+Package: filewatcher
+Version: 1.0.0
+Architecture: amd64
+Maintainer: Some Company
+Description: Some Company's file watcher

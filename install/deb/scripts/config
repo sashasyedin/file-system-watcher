@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_input high filewatcher/directory-path || true
+db_input high filewatcher/blob-storage-uri || true
+db_input low filewatcher/file-filter || true
+
+db_go || true

@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_get filewatcher/directory-path
+path=$RET
+path=$(printf "%s" "${path}" | sed 's|\/|\\\/|g')
+sed -i "/DirectoryPath/s/: ".*"/: \"${path}\",/" /usr/sbin/filewatcher/appsettings.json
+
+db_get filewatcher/blob-storage-uri
+uri=$RET
+uri=$(printf "%s" "${uri}" | sed 's|\/|\\\/|g')
+uri=$(printf "%s" "${uri}" | sed 's|\&|\\\&|g')
+sed -i "/Uri/s/: ".*"/: \"${uri}\",/" /usr/sbin/filewatcher/appsettings.json
+
+db_get filewatcher/file-filter
+filter=$RET
+filter=$(printf "%s" "${filter}" | sed 's|\/|\\\/|g')
+sed -i "/Filter/s/: ".*"/: \"${filter}\",/" /usr/sbin/filewatcher/appsettings.json
+
+chmod 0755 /usr/sbin/filewatcher/FileSystemWatcher.Host
+systemctl daemon-reload
+systemctl enable filewatcher.service
+systemctl start filewatcher.service
